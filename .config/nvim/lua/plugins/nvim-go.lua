@@ -1,0 +1,19 @@
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require('go').setup({
+  -- other setups ....
+  lsp_cfg = {
+    capabilities = capabilities,
+    -- other setups
+  },
+})
+
+-- require("go.format").gofmt()  -- gofmt only
+require("go.format").goimport()  -- goimport + gofmt
+
+-- Run gofmt on save
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+
+-- Run gofmt + goimport on save
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+
