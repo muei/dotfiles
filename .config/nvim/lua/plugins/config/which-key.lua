@@ -22,7 +22,10 @@ local mappings = {
     f = {
       name = "+File", -- optional group name
       f = { "<cmd>Telescope find_files<cr>", "Find Files" }, 
-      r = { "<cmd>Telescope oldfiles<cr>", "Recent Files", noremap=false, }, 
+      r = { "<cmd>Telescope oldfiles<cr>", "Recent Files"}, 
+      g = { "<cmd>Telescope live_grep<cr>", "Grep Files"}, 
+      h = { "<cmd>Telescope help_tags<cr>", "Grep Files"}, 
+      b = { "<cmd>Telescope buffers<cr>", "Buffers Files"}, 
     },
 
     b = {
@@ -41,6 +44,7 @@ local mappings = {
     z = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
+      C = { "<cmd>PackerClean<cr>", "Clean" },
       i = { "<cmd>PackerInstall<cr>", "Install" },
       s = { "<cmd>PackerSync<cr>", "Sync" },
       S = { "<cmd>PackerStatus<cr>", "Status" },
