@@ -5,6 +5,7 @@ if not status_ok then
   vim.notify(packer_name .. " not found!")
   return
 end
+
 vim.opt.termguicolors = true
 packer.setup{
   options = {

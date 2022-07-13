@@ -6,6 +6,8 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+vim.opt.timeoutlen = 300	--	Time in milliseconds to wait for a mapped sequence to complete.
+
 map("", ";", "<Nop>", opts)
 vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
@@ -39,9 +41,3 @@ map('n', '<C-l>', '<C-w>l')
 --map('n', '<leader>f', ':NvimTreeRefresh<CR>')       -- refresh
 --map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
 
--- bufferline
---map('n', '<leader>h', ':BufferLineCyclePrev<CR>')    -- move left tab
---map('n', '<leader>l', ':BufferLineCycleNext<CR>')    -- move right tab
---map('n', '<leader>cc', ':BufferLinePickClose<CR>')   -- close left tabs
---map('n', '<leader>cl', ':BufferLineCloseLeft<CR>')   -- close left tabs
---map('n', '<leader>cr', ':BufferLineCloseLeft<CR>')   -- close right tabs

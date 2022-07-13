@@ -43,3 +43,4 @@ vim.o.splitright = true
 vim.o.wildmenu = true	
 
 --vim.o.showtabline = 2
+

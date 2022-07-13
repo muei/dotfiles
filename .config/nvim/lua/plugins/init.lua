@@ -1,4 +1,3 @@
--- automatically install and set up packer.nvim on any machine
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -70,6 +69,8 @@ return require('packer').startup({function()
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   })
+  use "nvim-treesitter/nvim-treesitter-textobjects" -- enhance textobject selection
+  use "romgrk/nvim-treesitter-context" -- show class/function at the top
   
   -- nvim-tree
   use {
@@ -98,6 +99,9 @@ return require('packer').startup({function()
   use 'goolord/alpha-nvim' -- welcome page
   use 'stevearc/aerial.nvim' -- 大纲
 --  use 'norcalli/nvim-colorize.lua'
+
+  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+  use "terrortylor/nvim-comment"
   
   -- 代码格式化
   use("mhartington/formatter.nvim")
@@ -111,6 +115,28 @@ return require('packer').startup({function()
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+  --use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+  -- auto-session
+  use "rmagatti/auto-session"
+  -- autosave
+  use "Pocco81/AutoSave.nvim"
+  
+  -- clolor
+  use "lunarvim/colorschemes"
+  -- theme
+  use ({ 'projekt0n/github-nvim-theme' })
+
+  -- cmp plugins
+  use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+
+
   -- ray-x/go
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
