@@ -121,6 +121,15 @@ return require('packer').startup({function()
   use "rmagatti/auto-session"
   -- autosave
   use "Pocco81/AutoSave.nvim"
+  -- session-mananger
+  use "Shatur/neovim-session-manager"
+  --use "tpope/vim-repeat" --  . command enhance
+  --use "tpope/vim-surround" -- vim surround
+  -- surround
+  use("ur4ltz/surround.nvim")
+  -- Comment
+  use("numToStr/Comment.nvim")
+  use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
   
   -- clolor
   use "lunarvim/colorschemes"
@@ -133,6 +142,10 @@ return require('packer').startup({function()
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "hrsh7th/cmp-nvim-lsp"
+  --
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
+  vim.opt.completeopt = { "menu", "menuone", "noselect" }
   use "hrsh7th/cmp-nvim-lua"
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
