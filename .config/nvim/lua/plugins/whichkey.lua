@@ -1,7 +1,7 @@
 local packer_name = "which-key"
 local status_ok, packer = pcall(require, packer_name)
 if not status_ok then
-  vim.notify(packer_name .. " not found!")
+  vim.notify('Failed loading ' .. packername, vim.log.levels.ERROR)
   return
 end
 

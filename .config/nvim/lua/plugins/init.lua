@@ -26,13 +26,17 @@ local plugins = {
   { 'akinsho/bufferline.nvim', config = function() require('bufferline').setup() end }, -- buffer line 
   { 'nvim-lualine/lualine.nvim', config = function() require('lualine').setup() end }, -- status bar 
   { 'stevearc/aerial.nvim', config = function() require('aerial').setup() end }, -- code outline 
-  { 'lukas-reineke/indent-blankline.nvim', config = function() require('indent_blankline').setup() end }, -- code outline 
+  { 'ldelossa/litee.nvim', config = function() require('litee').setup() end }, -- project outline 
+  { 'lukas-reineke/indent-blankline.nvim', config = function() require('indent_blankline').setup() end }, -- indent blank line
+  { 'rcarriga/nvim-notify', config = function() require('notify').setup() end }, -- message notify
 
   -- UI Theme --
   { 'projekt0n/github-nvim-theme', config = function() require('github-theme').setup() end }, -- github like theme
 
   -- Key binding --
-  { 'folke/which-key.nvim' , config = function() require('plugins/whichkey') end },
+  { 'folke/which-key.nvim', config = function() require('plugins/whichkey') end },
+  { 'phaazon/hop.nvim', branch = 'v2', -- optional but strongly recommended
+    config = function() require('hop') end },
 
   -- Coding --
   { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end }, -- autopairs, integrates with both cmp and treesitter

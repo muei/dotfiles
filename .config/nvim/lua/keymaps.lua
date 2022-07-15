@@ -18,3 +18,4 @@ kmap('n', '<leader>r', ':luafile %<CR>')
 
 -- Map Esc to kk
 kmap('i', 'jj', '<Esc>')
+kmap('n', 'qq', ':q!<CR>')
