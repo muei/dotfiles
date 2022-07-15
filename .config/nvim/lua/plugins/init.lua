@@ -14,52 +14,45 @@ if not status_ok then
   return
 end
 
+-- define rules
+-- if no need required, define string
+-- if need required, define as k = v. k will be required, and has `setup` method, v will be used
+-- if the k = v mode, k starts with 'plugins.', this means has custom configuration file
+-- require packer should implement setup() function
 local plugins = {
   -- UI --
   'kyazdani42/nvim-web-devicons', -- icons for some plugins 
-  --['nvim-tree'] = 'kyazdani42/nvim-tree.lua', -- file structure
-  ['nvim-tree'] = { 'kyazdani42/nvim-tree.lua', config = function() require('nvim-tree').setup() end }, -- file structure
-  --bufferline = 'akinsho/bufferline.nvim', -- buffer file
-  --lualine = 'nvim-lualine/lualine.nvim', -- status bar
-  --aerial = 'stevearc/aerial.nvim', -- code outline
+  { 'kyazdani42/nvim-tree.lua', config = function() require('nvim-tree').setup() end }, -- file explorer
+  { 'akinsho/bufferline.nvim', config = function() require('bufferline').setup() end }, -- buffer line 
+  { 'nvim-lualine/lualine.nvim', config = function() require('lualine').setup() end }, -- status bar 
+  { 'stevearc/aerial.nvim', config = function() require('aerial').setup() end }, -- code outline 
+  { 'lukas-reineke/indent-blankline.nvim', config = function() require('indent_blankline').setup() end }, -- code outline 
 
-  ---- UI Theme --
-  --'projekt0n/github-nvim-theme', -- github like theme
+  -- UI Theme --
+  { 'projekt0n/github-nvim-theme', config = function() require('github-theme').setup() end }, -- github like theme
 
-  ---- Coding --
-  --"windwp/nvim-autopairs", -- autopairs, integrates with both cmp and treesitter
-  --"numToStr/Comment.nvim", -- comment
-  --"ethanholz/nvim-lastplace", -- auto return back to the last modified positon when open a file
+  -- Key binding --
+  { 'folke/which-key.nvim' , config = function() require('plugins/whichkey') end },
 
-  ---- Telescope --
-  --telescope = {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  -- Coding --
+  { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup() end }, -- autopairs, integrates with both cmp and treesitter
+  { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }, -- comment
+  { 'ethanholz/nvim-lastplace', config = function() require('nvim-lastplace').setup() end }, -- auto return back to the last modified positon when open a file
+  { 'Pocco81/AutoSave.nvim', config = function() require('autosave').setup() end }, -- auto save when editing
+
+  -- Telescope --
+  {'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} } , config = function() require('telescope').setup() end },
+
+  -- Git --
+  { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end },
 }
 
 packer.startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   
-	for k, v in pairs(plugins) do
-    if type(k) == "string" then
-      local packer_name = "plugins." .. k
-      local status_ok, packer = pcall(require, packer_name)
-      print(k)
-
-      local p = {
-        config = function() require(k).setup() end
-      }
-      if type(v) == "string" then
-        table.insert(p, v)
-      end
-      if status_ok then
-        -- the config exist
-        p["config"] = function() packer.setup() end
-      end
-
-      --table.insert(p, "config", config) 
-      use(v)
-
-    end
+	for _, v in pairs(plugins) do
+    use(v)
 	end
 
   -- Automatically set up your configuration after cloning packer.nvim

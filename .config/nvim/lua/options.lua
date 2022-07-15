@@ -31,7 +31,7 @@ vim.o.smartindent = true
 vim.o.incsearch = true
 
 -- command line
-vim.o.cmdheight = 2
+--vim.o.cmdheight = 2
 
 -- split window
 vim.o.splitbelow = true
