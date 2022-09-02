@@ -1,45 +1,50 @@
-local g =  vim.g
-local opt = vim.opt
--- encoding
-vim.g.encoding = "UTF-8"
-vim.o.fileencoding = "UTF-8"
+local options = {
+  encoding = "UTF-8",
+  fileencoding = "UTF-8",
 
--- autoread if changed by others
-vim.o.autoread = true
-vim.bo.autoread = true
+  -- autoread if changed by others
+  autoread = true,
+  autoread = true,
 
--- line
-vim.wo.number = true
-vim.wo.cursorline = true
+  -- line
+  number = true,
+  cursorline = true,
 
--- tab
-vim.o.tabstop = 2
-vim.bo.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftround = true
--- space instead of tab
-vim.o.expandtab = true
-vim.bo.expandtab = true
+  -- tab
+  tabstop = 2,
+  tabstop = 2,
+  softtabstop = 2,
+  shiftround = true,
+  -- space instead of tab
+  expandtab = true,
+  expandtab = true,
 
-vim.o.shiftwidth = 2
-vim.bo.shiftwidth = 2
+  shiftwidth = 2,
+  shiftwidth = 2,
 
--- new line auto align
-vim.o.autoindent = true
-vim.bo.autoindent = true
-vim.o.smartindent = true
+  -- new line auto align
+  autoindent = true,
+  autoindent = true,
+  smartindent = true,
 
--- search
-vim.o.incsearch = true
+  -- search
+  incsearch = true,
 
--- command line
--- vim.o.cmdheight = 2
+  -- command line
+  -- cmdheight = 2
 
--- split window
-vim.o.splitbelow = true
-vim.o.splitright = true
+  -- split window
+  splitbelow = true,                       -- force all horizontal splits to go below current window
+  splitright = true,                       -- force all vertical splits to go to the right of current window
 
--- increase autocomplete
-vim.o.wildmenu = true	
+  swapfile = false,                        -- creates a swapfile
 
---vim.o.showtabline = 2
+  -- increase autocomplete
+  wildmenu = true,	
+
+  --showtabline = 2,
+}
+
+for k,v in pairs(options) do
+	vim.opt[k] = v
+end

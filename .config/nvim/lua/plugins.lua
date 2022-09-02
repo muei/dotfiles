@@ -13,13 +13,24 @@ vim.cmd([[
   augroup end
 ]])
 
-local packer = require("packer")
+-- Use a protected call so we don't error out on first use
+local packer_name = "packer"
+local status_ok, packer = pcall(require, packer_name)
+if not status_ok then
+  vim.notify(packer_name .. " not found!")
+  return
+end
+
 packer.init({
   display = {
     -- configure Packer to use a floating window for command outputs
     open_fn = require('packer.util').float,
   }
 })
+
+local function config(name)
+  return string.format('require("configs/%s")', name)
+end
 
 return packer.startup(function(use)
   use("wbthomason/packer.nvim")
@@ -32,26 +43,27 @@ return packer.startup(function(use)
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icons
     },
-    config = function() require("nvim-tree").setup() end
+    -- config = function() config("nvim-tree") end
+    config = config("tree")
   }
 
   -- status lualine
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function() require("lualine").setup() end
+    config = config("lualine")
   }
 
   -- buffer line
   use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require("bufferline").setup() end   
+    config = config("bufferline")
   }
 
   -- indent blank line
-  use {'lukas-reineke/indent-blankline.nvim', config = function() require("bufferline").setup() end }
+  use {'lukas-reineke/indent-blankline.nvim', config = config("blankline")}
 
   -- 大纲
-  use {'stevearc/aerial.nvim', config = function() require("aerial").setup() end }
+  use {'stevearc/aerial.nvim', config = config("aerial")}
 
   -- 语法高亮
   use {
@@ -64,11 +76,11 @@ return packer.startup(function(use)
 
   ---------------- Editor -------------------
   -- comment
-  use { 'numToStr/Comment.nvim', config = function() require("Comment").setup() end } 
+  use { 'numToStr/Comment.nvim', config = config("comment")} 
   -- surround
-  use { 'kylechui/nvim-surround', config = function() require("nvim-surround").setup() end } 
+  use { 'kylechui/nvim-surround', config = config("surround")} 
   -- autopairs
-  use { 'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup() end } 
+  use { 'windwp/nvim-autopairs', config = config("autopairs")} 
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
