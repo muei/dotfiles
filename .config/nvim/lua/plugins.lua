@@ -72,7 +72,18 @@ return packer.startup(function(use)
   }
 
   ---- key bindings ----
+  use {
+    "junegunn/vim-easy-align"
+  }
 
+  use {"folke/which-key.nvim", config = config("which-key")}
+
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = config("telescope")
+  }
 
   ---------------- Editor -------------------
   -- comment
