@@ -6,14 +6,6 @@ if not status_ok then
   return
 end
 packer.setup()
-local opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "<Space>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
 local mappings = {
   ["<leader>"] = {
     f = {
@@ -24,7 +16,6 @@ local mappings = {
       h = { "<cmd>Telescope help_tags<cr>", "Help"}, 
       b = { "<cmd>Telescope buffers<cr>", "Buffers Files"}, 
     },
-
     b = {
       name = "Buffer",
       --D = { "<cmd>%bd|e#|bd#<cr>", "Delete all buffers" },
@@ -49,7 +40,5 @@ local mappings = {
     },
   },
 
-  ["<"] = { "<gv", "Keep indent left in visual mode", mode = "v" },
-  [">"] = { ">gv", "Keep indent right in visual mode", mode = "v" },
 }
-packer.register(mappings, opts)
+packer.register(mappings)

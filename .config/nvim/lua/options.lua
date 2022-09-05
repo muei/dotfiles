@@ -42,9 +42,9 @@ local options = {
   -- increase autocomplete
   wildmenu     = true,
 
-  --showtabline = 2,
+  showtabline = 2,
 }
 
 for k,v in pairs(options) do
-	vim.opt[k] = v
+  vim.opt[k] = v
 end

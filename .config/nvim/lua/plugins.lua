@@ -55,9 +55,7 @@ return packer.startup(function(use)
   }
 
   -- buffer line
-  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons',
-    config = config("bufferline")
-  }
+  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config = config("bufferline")}
 
   -- indent blank line
   use {'lukas-reineke/indent-blankline.nvim', config = config("blankline")}
@@ -66,21 +64,18 @@ return packer.startup(function(use)
   use {'stevearc/aerial.nvim', config = config("aerial")}
 
   -- 语法高亮
-  use {
+  --[[ use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-  }
+  } ]]
 
   ---- key bindings ----
-  use {
-    "junegunn/vim-easy-align"
-  }
+  use {"junegunn/vim-easy-align"}
 
   use {"folke/which-key.nvim", config = config("which-key")}
 
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  -- or                            , branch = '0.1.x',
+  use { 'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} },
     config = config("telescope")
   }
