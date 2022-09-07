@@ -10,6 +10,9 @@ local options = {
   number       = true,
   cursorline   = true,
 
+  signcolumn   = "yes", -- show the sign column
+  numberwidth  = 2, -- sign column width
+
   -- tab
   tabstop      = 2,
   tabstop      = 2,
@@ -42,7 +45,8 @@ local options = {
   -- increase autocomplete
   wildmenu     = true,
 
-  showtabline = 2,
+  showtabline  = 2,
+
 }
 
 for k,v in pairs(options) do
