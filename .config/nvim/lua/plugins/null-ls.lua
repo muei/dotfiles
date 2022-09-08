@@ -22,4 +22,9 @@ packer.setup{
             })
         end
     end,
+    sources = {
+        packer.builtins.formatting.stylua,
+        packer.builtins.diagnostics.eslint,
+        packer.builtins.completion.spell,
+    },
 }

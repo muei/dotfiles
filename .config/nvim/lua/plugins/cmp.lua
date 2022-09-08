@@ -1,6 +1,5 @@
 -- Use a protected call so we don't error out on first use
 local packer_name = "cmp"
-print "cmp"
 local status_ok, cmp = pcall(require, packer_name)
 if not status_ok then
   vim.notify(packer_name .. " not found!")
@@ -24,18 +23,19 @@ snippet = {
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
+      ['<C-Space>'] = cmp.mapping.complete(), -- 补全
+      ['<C-e>'] = cmp.mapping.abort(), -- 取消弹窗
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'vsnip' }, -- For vsnip users.
       -- { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
-    }, {
       { name = 'buffer' },
+      { name = 'path' },
+      { name = 'spell' },
     })
 }
 

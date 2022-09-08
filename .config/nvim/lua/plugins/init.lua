@@ -79,13 +79,16 @@ return packer.startup(function(use)
   use {'simrat39/rust-tools.nvim', config = config"rust-tools"}
 
   --[[ cmp ]]
-  use {"hrsh7th/nvim-cmp", config = config"cmp"}
+  use {"hrsh7th/nvim-cmp", config = config"cmp"} -- 补全
+  use "hrsh7th/cmp-path" -- 路径补全
+  use "hrsh7th/cmp-buffer" -- 当前文本编辑补全
+  use "hrsh7th/cmp-cmdline" -- 命令行补全
+  use "hrsh7th/cmp-vsnip"
+  use "hrsh7th/vim-vsnip"
   use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lsp-signature-help"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lua"
+  use "hrsh7th/cmp-nvim-lsp-signature-help"
+  use "f3fora/cmp-spell" -- 英文单词拼写
 
   --[[ format ]]
   use {"jose-elias-alvarez/null-ls.nvim", config = config"null-ls"}
