@@ -1,4 +1,4 @@
-local options = {
+local options  = {
   encoding     = "UTF-8",
   fileencoding = "UTF-8",
 
@@ -34,7 +34,7 @@ local options = {
   incsearch    = true,
 
   -- command line
-  -- cmdheight = 2
+  cmdheight    = 1,
 
   -- split window
   splitbelow   = true,                       -- force all horizontal splits to go below current window
@@ -50,5 +50,5 @@ local options = {
 }
 
 for k,v in pairs(options) do
-  vim.opt[k] = v
+  vim.opt[k]   = v
 end

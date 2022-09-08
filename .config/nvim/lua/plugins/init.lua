@@ -79,20 +79,13 @@ return packer.startup(function(use)
   use {'simrat39/rust-tools.nvim', config = config"rust-tools"}
 
   --[[ cmp ]]
-   use {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        requires = {
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-nvim-lsp-signature-help" },
-            { "hrsh7th/cmp-path", after = "nvim-cmp" },
-            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-            { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-            -- { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-        },
-        config = config"cmp",
-    }
+  use {"hrsh7th/nvim-cmp", config = config"cmp"}
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lsp-signature-help"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lua"
 
   --[[ format ]]
   use {"jose-elias-alvarez/null-ls.nvim", config = config"null-ls"}
