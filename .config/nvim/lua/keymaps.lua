@@ -6,7 +6,7 @@ local expr_options = { expr = true, silent = true }
 --Remap space as leader key
 map({ "n", "v" }, ";", "<Nop>", { silent = true })
 vim.g.mapleader = ";"
-
+vim.g.localleader = ";"
 
 -- better indenting
 map("v", "<", "<gv", default_options)
@@ -19,3 +19,6 @@ map("n", "<S-TAB>", ":bprev<CR>", default_options)
 
 -- Cancel search highlighting with ESC
 map("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_options)
+
+-- map("ww", "<ESC>", ":wCR>", default_options)
+-- map("wq", "<ESC>", ":x<CR>", default_options)

@@ -28,8 +28,9 @@ packer.init({
   }
 })
 
-local function config(name)
-  return string.format('require("plugins/%s")', name)
+local function config(name, path)
+  path = path or "plugins"
+  return string.format('require("%s/%s")', path, name)
 end
 
 return packer.startup(function(use)
@@ -51,6 +52,7 @@ return packer.startup(function(use)
   --[[ 快捷键 ]]
   use {"junegunn/vim-easy-align"}
   use {'numToStr/Comment.nvim', config = function() require"Comment".setup() end} -- 注释 
+  use {'folke/which-key.nvim', config = config"which-key"} -- 快捷键映射 
   use { 'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     config = config("telescope")
@@ -71,8 +73,29 @@ return packer.startup(function(use)
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    config = function() require("lsp/") end,
+    config = config("", "lsp"),
   }
+
+  use {'simrat39/rust-tools.nvim', config = config"rust-tools"}
+
+  --[[ cmp ]]
+   use {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        requires = {
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-nvim-lsp-signature-help" },
+            { "hrsh7th/cmp-path", after = "nvim-cmp" },
+            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+            { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+            -- { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+        },
+        config = config"cmp",
+    }
+
+  --[[ format ]]
+  use {"jose-elias-alvarez/null-ls.nvim", config = config"null-ls"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

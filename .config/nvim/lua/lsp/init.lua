@@ -44,6 +44,7 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
+print "hello lsp"
 require("mason").setup()
 require("mason-lspconfig").setup{
   ensure_installed = { "sumneko_lua", "rust_analyzer" }

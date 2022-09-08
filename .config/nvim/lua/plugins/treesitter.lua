@@ -6,6 +6,11 @@ if not status_ok then
   return
 end
 -- packer.setup()
+
+-- Treesitter folding 
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
 require"nvim-treesitter.configs".setup{
   ensure_installed = {"lua", "rust"},
 

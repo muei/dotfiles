@@ -28,6 +28,7 @@ local mappings = {
     },
 
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    r = { "<cmd>luafile %<cr>", "Reload current file"},
 
     z = {
       name = "Packer",
