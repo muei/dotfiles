@@ -9,7 +9,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins/init.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -94,9 +94,14 @@ return packer.startup(function(use)
 
   --[[ format ]]
   use {"jose-elias-alvarez/null-ls.nvim", config = config"null-ls"}
+  use "sbdchd/neoformat"
 
   --[[ terminal ]]
   use {"voldikss/vim-floaterm"}
+
+
+  --[[ git ]]
+  use {"lewis6991/gitsigns.nvim", config = config"gitsigns"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

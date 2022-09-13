@@ -4,7 +4,6 @@ local options  = {
 
   -- autoread if changed by others
   autoread     = true,
-  autoread     = true,
 
   -- line
   number       = true,
@@ -20,13 +19,9 @@ local options  = {
   shiftround   = true,
   -- space instead of tab
   expandtab    = true,
-  expandtab    = true,
-
-  shiftwidth   = 2,
   shiftwidth   = 2,
 
   -- new line auto align
-  autoindent   = true,
   autoindent   = true,
   smartindent  = true,
 
