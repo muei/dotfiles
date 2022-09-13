@@ -41,7 +41,9 @@ return packer.startup(function(use)
 
   --[[ UI ]]
   use "kyazdani42/nvim-web-devicons" -- 字体图标
-  use "folke/tokyonight.nvim" -- theme
+  --[[ theme ]]
+  use "folke/tokyonight.nvim" 
+  use {"tanvirtin/monokai.nvim", config = function() require("monokai").setup{} end}
 
   use {'kyazdani42/nvim-tree.lua', config = function() require"nvim-tree".setup() end} -- 文件目录 
   use {'stevearc/aerial.nvim', config = function() require"aerial".setup() end} -- 大纲
@@ -92,6 +94,9 @@ return packer.startup(function(use)
 
   --[[ format ]]
   use {"jose-elias-alvarez/null-ls.nvim", config = config"null-ls"}
+
+  --[[ terminal ]]
+  use {"voldikss/vim-floaterm"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
