@@ -1,6 +1,6 @@
 -- Use a protected call so we don't error out on first use
 local packer_name = "lspconfig"
-local status_ok, packer = pcall(require, packer_name)
+local status_ok, lspconfig = pcall(require, packer_name)
 if not status_ok then
   vim.notify(packer_name .. " not found!")
   return
@@ -14,6 +14,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+---
+-- Global Config
+---
 local lsp_defaults = {
   flags = {
     -- This is the default in Nvim 0.7+
@@ -53,9 +56,9 @@ local lsp_defaults = {
 
 }
 
-packer.util.default_config = vim.tbl_deep_extend(
+lspconfig.util.default_config = vim.tbl_deep_extend(
   'force',
-  packer.util.default_config,
+  lspconfig.util.default_config,
   lsp_defaults
 )
 
@@ -63,7 +66,7 @@ packer.util.default_config = vim.tbl_deep_extend(
 -- LSP Servers
 ---
 
-packer.sumneko_lua.setup({})
+-- lspconfig.sumneko_lua.setup({})
 
 require("mason").setup()
 require("mason-lspconfig").setup{
