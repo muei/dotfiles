@@ -39,6 +39,21 @@ local mappings = {
       S = { "<cmd>PackerStatus<cr>", "Status" },
       u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
+
+    t = {
+      name="+terminal",
+      a = {"<cmd>FloatermNew --wintype=popup --height=6<cr>","terminal"},
+      -- f = {"<cmd>FloatermNew fzf<cr>","fzf"},
+      -- g = {"<cmd>FloatermNew lazygit<cr>","lazygit"},
+      -- d = {"<cmd>FloatermNew lazydocker<cr>","lazydocker"},
+      -- n = {"<cmd>FloatermNew node<cr>","node"},
+      -- N = {"<cmd>FloatermNew nnn<cr>","nnn"},
+      -- p = {"<cmd>FloatermNew python<cr>","python"},
+      -- r = {"<cmd>FloatermNew ranger<cr>","ranger"},
+      t = {"<cmd>FloatermToggle<cr>","toggle"},
+      -- y = {"<cmd>FloatermNew ytop<cr>","ytop"},
+      -- s = {"<cmd>FloatermNew ncdu<cr>","ncdu"},
+      },
   },
 
 }
