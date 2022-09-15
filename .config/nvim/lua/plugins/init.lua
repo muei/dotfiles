@@ -98,6 +98,7 @@ return packer.startup(function(use)
 
   --[[ terminal ]]
   use {"voldikss/vim-floaterm"}
+  use {"akinsho/toggleterm.nvim", config = config"toggleterm"}
 
 
   --[[ git ]]
