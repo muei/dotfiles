@@ -61,12 +61,12 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
 -- LSP Servers
 ---
 
--- lspconfig.sumneko_lua.setup({})
-
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "rust_analyzer" },
+	ensure_installed = { "sumneko_lua", "rust_analyzer", "pyright" },
 })
+
+lspconfig.sumneko_lua.setup({})
 
 lspconfig["pyright"].setup({
 	on_attach = on_attach,
