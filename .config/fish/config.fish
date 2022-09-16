@@ -10,6 +10,9 @@ set -x GOPROXY https://goproxy.cn,direct
 # rust
 set -gx PATH "$HOME/.cargo/bin" $PATH
 
+# python
+set -gx PATH "$HOME/.local/bin" $PATH
+
 # Wayland
 set -x MOZ_ENABLE_WAYLAND 1
 # set -x SDL_VIDEODRIVER wayland

@@ -1,5 +1,4 @@
 -- Use a protected call so we don't error out on first use
-print("hello mason")
 local packer_name = "lspconfig"
 local status_ok, lspconfig = pcall(require, packer_name)
 if not status_ok then
