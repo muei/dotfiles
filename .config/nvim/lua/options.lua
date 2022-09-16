@@ -42,6 +42,10 @@ local options  = {
 
   showtabline  = 2,
 
+  -- shortmess = vim.opt.shortmess .. "c", -- Don't pass messages to |ins-completion-menu| -- Don't pass messages to |ins-completion-menu|
+
+  updatetime=300, --  Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
+
 }
 
 for k,v in pairs(options) do

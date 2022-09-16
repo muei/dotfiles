@@ -74,12 +74,12 @@ require("mason-lspconfig").setup{
 }
 
 
-packer['pyright'].setup{
+lspconfig['pyright'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
 }
-packer['rust_analyzer'].setup{
+lspconfig['rust_analyzer'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
