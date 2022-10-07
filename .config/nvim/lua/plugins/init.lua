@@ -103,25 +103,17 @@ return packer.startup(function(use)
 		end,
 	})
 
-	--[[ 语法高亮 ]]
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end,
-	})
-
-	--[[ lsp ]]
-	use({
-		"williamboman/mason.nvim",
-		requires = {
-			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
-		},
-		config = config("", "lsp"),
-	})
-
-	use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
+	-- --[[ lsp ]]
+	-- use({
+	-- 	"williamboman/mason.nvim",
+	-- 	requires = {
+	-- 		"williamboman/mason-lspconfig.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 	},
+	-- 	config = config("", "lsp"),
+	-- })
+ --
+	-- use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
 	--[[ cmp ]]
 	use({ "hrsh7th/nvim-cmp", config = config("cmp") }) -- 补全
@@ -135,9 +127,9 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("f3fora/cmp-spell") -- 英文单词拼写
 
-	--[[ format ]]
-	use({ "jose-elias-alvarez/null-ls.nvim", config = config("null-ls") })
-	use("sbdchd/neoformat")
+	-- --[[ format ]]
+	-- use({ "jose-elias-alvarez/null-ls.nvim", config = config("null-ls") })
+  -- use("sbdchd/neoformat")
 
 	--[[ terminal ]]
 	use({ "voldikss/vim-floaterm" })

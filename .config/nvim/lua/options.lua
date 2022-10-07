@@ -29,7 +29,7 @@ local options  = {
   incsearch    = true,
 
   -- command line
-  cmdheight    = 1,
+  cmdheight    = 0,
 
   -- split window
   splitbelow   = true,                       -- force all horizontal splits to go below current window
@@ -44,7 +44,7 @@ local options  = {
 
   -- shortmess = vim.opt.shortmess .. "c", -- Don't pass messages to |ins-completion-menu| -- Don't pass messages to |ins-completion-menu|
 
-  updatetime=300, --  Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
+  updatetime   = 300, --  Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
 
 }
 
