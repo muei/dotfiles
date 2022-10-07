@@ -16,7 +16,15 @@ git clone https://github.com/muei/dotfiles.git ~/dotfiles
 # create the configuration dir if not exist
 mkdir ~/.config
 cd ~/.config
+
+# link nvim
 ln -s ~/dotfiles/.config/nvim nvim
+
+# link sway
+ln -s ~/dotfiles/.config/sway sway
+
+# link fish
+ln -s ~/dotfiles/.config/fish fish
 ```
 4. Install plugins
 ```bash
