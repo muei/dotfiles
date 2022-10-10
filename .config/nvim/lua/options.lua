@@ -14,7 +14,6 @@ local options  = {
 
   -- tab
   tabstop      = 2,
-  tabstop      = 2,
   softtabstop  = 2,
   shiftround   = true,
   -- space instead of tab

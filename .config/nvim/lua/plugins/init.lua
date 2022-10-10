@@ -127,15 +127,15 @@ return packer.startup(function(use)
 	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
 
 	--[[ lsp ]]
-	-- use({
-	-- 	"williamboman/mason.nvim",
-	-- 	requires = {
-	-- 		"williamboman/mason-lspconfig.nvim",
-	-- 		"neovim/nvim-lspconfig",
-	-- 	},
-	-- 	config = config("", "lsp"),
-	-- })
- --
+	use({
+		"williamboman/mason.nvim",
+		requires = {
+			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		config = config("", "lsp"),
+	})
+
 	-- use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
 	-- Automatically set up your configuration after cloning packer.nvim
