@@ -103,18 +103,6 @@ return packer.startup(function(use)
 		end,
 	})
 
-	-- --[[ lsp ]]
-	-- use({
-	-- 	"williamboman/mason.nvim",
-	-- 	requires = {
-	-- 		"williamboman/mason-lspconfig.nvim",
-	-- 		"neovim/nvim-lspconfig",
-	-- 	},
-	-- 	config = config("", "lsp"),
-	-- })
- --
-	-- use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
-
 	--[[ cmp ]]
 	use({ "hrsh7th/nvim-cmp", config = config("cmp") }) -- 补全
 	use("hrsh7th/cmp-path") -- 路径补全
@@ -137,6 +125,18 @@ return packer.startup(function(use)
 
 	--[[ git ]]
 	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
+
+	--[[ lsp ]]
+	-- use({
+	-- 	"williamboman/mason.nvim",
+	-- 	requires = {
+	-- 		"williamboman/mason-lspconfig.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 	},
+	-- 	config = config("", "lsp"),
+	-- })
+ --
+	-- use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
