@@ -7,4 +7,7 @@ if not status_ok then
 end
 
 packer.setup{
+  open_mapping = [[<C-\>]],
+  start_in_insert = true,
+  direction = "horizontal",
 }
