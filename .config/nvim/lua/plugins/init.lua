@@ -37,6 +37,11 @@ end
 return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("nvim-lua/plenary.nvim")
+	use({"rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require("notify")
+    end
+  })
 
 	use({ "famiu/nvim-reload" })
 
@@ -125,6 +130,9 @@ return packer.startup(function(use)
 
 	--[[ git ]]
 	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
+
+  --[[ save ]]
+	use({ "Pocco81/auto-save.nvim", config = config("auto-save") })
 
 	--[[ lsp ]]
 	use({

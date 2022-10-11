@@ -45,6 +45,8 @@ local options  = {
 
   updatetime   = 300, --  Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
 
+  termguicolors = true,
+
 }
 
 for k,v in pairs(options) do
