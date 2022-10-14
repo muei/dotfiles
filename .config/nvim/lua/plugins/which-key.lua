@@ -29,6 +29,7 @@ local mappings = {
 
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     r = { "<cmd>luafile %<cr>", "Reload current file"},
+    m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
 
     z = {
       name = "Packer",

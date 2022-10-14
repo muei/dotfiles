@@ -121,7 +121,7 @@ lspconfig.sumneko_lua.setup({
   single_file_support = true,
   on_attach = function(client, bufnr)
     lspconfig.util.default_config.on_attach(client, bufnr)
-  end
+  end,
 })
 
 lspconfig["pyright"].setup({
@@ -129,12 +129,12 @@ lspconfig["pyright"].setup({
 	-- flags = lsp_flags,
 	-- capabilities = capabilities,
 })
-lspconfig["rust_analyzer"].setup({
-	on_attach = on_attach,
-	flags = lsp_flags,
-	capabilities = capabilities,
-	-- Server-specific settings...
-	settings = {
-		["rust-analyzer"] = {},
-	},
-})
+-- lspconfig["rust_analyzer"].setup({
+-- 	on_attach = on_attach,
+-- 	flags = lsp_flags,
+-- 	capabilities = capabilities,
+-- 	-- Server-specific settings...
+-- 	settings = {
+-- 		["rust-analyzer"] = {},
+-- 	},
+-- })

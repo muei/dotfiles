@@ -1,11 +1,16 @@
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap =
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-	print("Installing packer...")
-	vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function ()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    print("Installing packer...")
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 vim.cmd([[
   augroup packer_user_config
@@ -19,7 +24,7 @@ local packer_name = "packer"
 local status_ok, packer = pcall(require, packer_name)
 if not status_ok then
 	vim.notify(packer_name .. " not found!")
-	return
+  return
 end
 
 packer.init({
@@ -37,6 +42,7 @@ end
 return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("nvim-lua/plenary.nvim")
+	use("nvim-lua/popup.nvim")
 	use({"rcarriga/nvim-notify",
     config = function()
       vim.notify = require("notify")
@@ -58,9 +64,7 @@ return packer.startup(function(use)
 
 	use({
 		"kyazdani42/nvim-tree.lua",
-		config = function()
-			require("nvim-tree").setup()
-		end,
+		config = config("nvim-tree"),
 	}) -- 文件目录
 	use({
 		"stevearc/aerial.nvim",
@@ -93,6 +97,13 @@ return packer.startup(function(use)
 	}) -- 注释
 	use({ "folke/which-key.nvim", config = config("which-key") }) -- 快捷键映射
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", config = config("telescope") }) -- 文件查找
+  use({
+    "nvim-telescope/telescope-media-files.nvim",
+    config = function()
+      -- require"telescope".extensions.media_files.media_files()
+      require"telescope".load_extension('media_files')
+    end
+  })
 
 	--[[ 编辑 ]]
 	use({
@@ -131,8 +142,16 @@ return packer.startup(function(use)
 	--[[ git ]]
 	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
 
-  --[[ save ]]
+  --[[ autosave ]]
 	use({ "Pocco81/auto-save.nvim", config = config("auto-save") })
+
+  --[[ markdown preview ]]
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  use {'edluffy/hologram.nvim', config = config("hologram")}
 
 	--[[ lsp ]]
 	use({

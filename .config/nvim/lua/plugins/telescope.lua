@@ -5,6 +5,7 @@ if not status_ok then
   vim.notify(packer_name .. " not found!")
   return
 end
+-- packer.load_extension('media_files')
 packer.setup{
   defaults = {
     -- Default configuration for telescope goes here:
@@ -18,5 +19,14 @@ packer.setup{
       }
     }
   },
+  extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      -- find_cmd = "rg" -- find command (defaults to `fd`)
+    }
+  },
+
 }
 
