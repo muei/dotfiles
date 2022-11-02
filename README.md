@@ -30,6 +30,10 @@ ln -s ~/dotfiles/.config/fish fish
 ```bash
 nvim +PackerSync
 ```
+#set fish as default shell
+```
+chsh -s /usr/bin/fish
+```
 ### Key bindings
 
 #### File
