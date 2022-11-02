@@ -43,7 +43,7 @@ local mappings = {
 
     t = {
       name="+terminal",
-      -- a = {"<cmd>FloatermNew --wintype=popup --height=6<cr>","terminal"},
+      a = {"<cmd>FloatermNew --wintype=popup --height=6<cr>","terminal"},
       -- f = {"<cmd>FloatermNew fzf<cr>","fzf"},
       -- g = {"<cmd>FloatermNew lazygit<cr>","lazygit"},
       -- d = {"<cmd>FloatermNew lazydocker<cr>","lazydocker"},
