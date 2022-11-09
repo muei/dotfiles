@@ -9,6 +9,13 @@ end
 packer.setup{
   defaults = {
     -- Default configuration for telescope goes here:
+    file_ignore_patters = {
+      "^./.git/",
+      "^./target/",
+      "LICENSE*"
+    },
+    layout_strategy = 'vertical',
+    layout_config = { height = 0.95, width = 0.95 },
     -- config_key = value,
     mappings = {
       i = {
@@ -30,3 +37,6 @@ packer.setup{
 
 }
 
+
+-- packer.load_extension("media_files")
+-- packer.load_extension("fzf")

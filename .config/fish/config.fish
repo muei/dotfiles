@@ -9,6 +9,7 @@ set -x GOPROXY https://goproxy.cn,direct
 
 # rust
 set -gx PATH "$HOME/.cargo/bin" $PATH
+set -gx PATH "$HOME/.local/bin" $PATH
 
 # python
 set -gx PATH "$HOME/.local/bin" $PATH

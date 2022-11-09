@@ -163,7 +163,7 @@ return packer.startup(function(use)
 		config = config("", "lsp"),
 	})
 
-	-- use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
+	use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -20,6 +20,19 @@ snippet = {
       -- completion = cmp.config.window.bordered(),
       -- documentation = cmp.config.window.bordered(),
     },
+    formatting = {
+      fields = {'menu', 'abbr', 'kind'},
+      format = function(entry, item)
+          local menu_icon ={
+              nvim_lsp = 'λ',
+              vsnip = '⋗',
+              buffer = 'Ω',
+              path = '🖫',
+          }
+          item.menu = menu_icon[entry.source.name]
+          return item
+      end,
+  },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -29,13 +42,15 @@ snippet = {
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      -- { name = 'vsnip' }, -- For vsnip users.
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'vsnip' }, -- For vsnip users.
       -- { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
       { name = 'buffer' },
       { name = 'path' },
       { name = 'spell' },
+      { name = 'calc'},                               -- source for math calculatio
     })
 }
 
