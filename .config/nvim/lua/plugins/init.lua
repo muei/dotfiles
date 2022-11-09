@@ -1,4 +1,4 @@
-local ensure_packer = function ()
+local   ensure_packer = function ()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
@@ -50,6 +50,13 @@ return packer.startup(function(use)
   })
 
 	use({ "famiu/nvim-reload" })
+
+  -- use({
+  --   "mhartington/formatter.nvim",
+  --   config = function ()
+  --     require("formatter").setup{}
+  --   end
+  -- })
 
 	--[[ UI ]]
 	use("kyazdani42/nvim-web-devicons") -- 字体图标
