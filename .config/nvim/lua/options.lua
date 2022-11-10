@@ -49,6 +49,12 @@ local options  = {
 
   clipboard = "unnamedplus",
 
+  -- jkhl 移动时光标周围保留8行
+  scrolloff = 8,
+  sidescrolloff = 8,
+
+  -- 右侧参考线, 超过了可以考虑换行
+  colorcolumn = "80",
 }
 
 for k,v in pairs(options) do

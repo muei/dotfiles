@@ -32,6 +32,11 @@ packer.init({
 		-- configure Packer to use a floating window for command outputs
 		open_fn = require("packer.util").float,
 	},
+  max_jobs = 16, -- 最大并发数
+  -- 定义源
+  -- git = {
+  --   default_url_format = "https://mirror.ghproxy.com/https://github.com/%s"
+  -- }
 })
 
 local function config(name, path)
