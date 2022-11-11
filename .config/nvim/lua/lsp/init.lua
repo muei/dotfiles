@@ -117,12 +117,20 @@ require("mason-lspconfig").setup({
 	ensure_installed = { "sumneko_lua", "rust_analyzer", "pyright" },
 })
 
-lspconfig.sumneko_lua.setup({
+lspconfig.sumneko_lua.setup{
   single_file_support = true,
   on_attach = function(client, bufnr)
     lspconfig.util.default_config.on_attach(client, bufnr)
   end,
-})
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      }
+    }
+  }
+}
 
 lspconfig["pyright"].setup({
 	-- on_attach = on_attach,

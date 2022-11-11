@@ -22,9 +22,9 @@ local progress = function()
 end
 
 packer.setup{
-  options = {
-    theme = "tokyonight"
-  },
+  -- options = {
+  --   theme = "tokyonight"
+  -- },
   sections = {
     lualine_x = {'encoding', 'fileformat', 'filetype', spaces},
     -- lualine_z = { progress },

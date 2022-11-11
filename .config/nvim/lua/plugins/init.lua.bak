@@ -1,13 +1,13 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		print("Installing packer...")
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local   ensure_packer = function ()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    print("Installing packer...")
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -24,7 +24,7 @@ local packer_name = "packer"
 local status_ok, packer = pcall(require, packer_name)
 if not status_ok then
 	vim.notify(packer_name .. " not found!")
-	return
+  return
 end
 
 packer.init({
@@ -32,11 +32,11 @@ packer.init({
 		-- configure Packer to use a floating window for command outputs
 		open_fn = require("packer.util").float,
 	},
-	-- max_jobs = 16, -- 最大并发数
-	-- 定义源
-	-- git = {
-	--   default_url_format = "https://mirror.ghproxy.com/https://github.com/%s"
-	-- }
+  max_jobs = 16, -- 最大并发数
+  -- 定义源
+  -- git = {
+  --   default_url_format = "https://mirror.ghproxy.com/https://github.com/%s"
+  -- }
 })
 
 local function config(name, path)
@@ -46,46 +46,38 @@ end
 
 return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
-	use("nvim-lua/plenary.nvim") -- window manager
-	use("nvim-lua/popup.nvim") -- Popup API from vim in Neovim
-	use("kyazdani42/nvim-web-devicons")
-	-- use({"rcarriga/nvim-notify",
-	--    config = function()
-	--      vim.notify = require("notify")
-	--    end
-	--  })
+	use("nvim-lua/plenary.nvim")
+	use("nvim-lua/popup.nvim")
+	use({"rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require("notify")
+    end
+  })
 
-	-- use({ "famiu/nvim-reload" })
+	use({ "famiu/nvim-reload" })
 
-	-- use({
-	--   "mhartington/formatter.nvim",
-	--   config = function ()
-	--     require("formatter").setup{}
-	--   end
-	-- })
+  -- use({
+  --   "mhartington/formatter.nvim",
+  --   config = function ()
+  --     require("formatter").setup{}
+  --   end
+  -- })
 
 	--[[ UI ]]
+	use("kyazdani42/nvim-web-devicons") -- 字体图标
 	--[[ theme ]]
-	-- use("folke/tokyonight.nvim")
-	-- use({
-	-- 	"tanvirtin/monokai.nvim",
-	-- 	config = function()
-	-- 		require("monokai").setup({})
-	-- 	end,
-	-- })
-
-	-- use({
-	-- 	"kyazdani42/nvim-tree.lua",
-	-- 	config = config("nvim-tree"),
-	-- }) -- 文件目录
+	use("folke/tokyonight.nvim")
 	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		requires = {
-			"MunifTanjim/nui.nvim",
-		},
-		config = config("neo-tree"),
+		"tanvirtin/monokai.nvim",
+		config = function()
+			require("monokai").setup({})
+		end,
 	})
+
+	use({
+		"kyazdani42/nvim-tree.lua",
+		config = config("nvim-tree"),
+	}) -- 文件目录
 	use({
 		"stevearc/aerial.nvim",
 		config = function()
@@ -96,10 +88,9 @@ return packer.startup(function(use)
 	use({
 		"akinsho/bufferline.nvim",
 		tag = "v2.*",
-		-- config = function()
-		-- 	require("bufferline").setup()
-		-- end,
-		config = "require'bufferline'.setup()",
+		config = function()
+			require("bufferline").setup()
+		end,
 	}) -- buffer line
 	use({
 		"lukas-reineke/indent-blankline.nvim",
@@ -112,20 +103,19 @@ return packer.startup(function(use)
 	use({ "junegunn/vim-easy-align" })
 	use({
 		"numToStr/Comment.nvim",
-		-- config = function()
-		-- 	require("Comment").setup()
-		-- end,
-		config = "require'Comment'.setup()",
+		config = function()
+			require("Comment").setup()
+		end,
 	}) -- 注释
 	use({ "folke/which-key.nvim", config = config("which-key") }) -- 快捷键映射
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", config = config("telescope") }) -- 文件查找
-	use({
-		"nvim-telescope/telescope-media-files.nvim",
-		config = function()
-			-- require"telescope".extensions.media_files.media_files()
-			require("telescope").load_extension("media_files")
-		end,
-	})
+  use({
+    "nvim-telescope/telescope-media-files.nvim",
+    config = function()
+      -- require"telescope".extensions.media_files.media_files()
+      require"telescope".load_extension('media_files')
+    end
+  })
 
 	--[[ 编辑 ]]
 	use({
@@ -154,25 +144,26 @@ return packer.startup(function(use)
 	use("f3fora/cmp-spell") -- 英文单词拼写
 
 	-- --[[ format ]]
-	use({ "jose-elias-alvarez/null-ls.nvim", config = "require'plugins/null-ls'" })
+	-- use({ "jose-elias-alvarez/null-ls.nvim", config = config("null-ls") })
+  -- use("sbdchd/neoformat")
 
 	--[[ terminal ]]
-	-- use({ "voldikss/vim-floaterm" })
+	use({ "voldikss/vim-floaterm" })
 	use({ "akinsho/toggleterm.nvim", config = config("toggleterm") })
 
 	--[[ git ]]
-	-- use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
+	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
 
-	--[[ autosave ]]
+  --[[ autosave ]]
 	use({ "Pocco81/auto-save.nvim", config = config("auto-save") })
 
-	--[[ markdown preview ]]
-	-- use({
-	--   "iamcco/markdown-preview.nvim",
-	--   run = function() vim.fn["mkdp#util#install"]() end,
-	-- })
+  --[[ markdown preview ]]
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 
-	-- use {'edluffy/hologram.nvim', config = config("hologram")} -- terminal image viewer
+  use {'edluffy/hologram.nvim', config = config("hologram")}
 
 	--[[ lsp ]]
 	use({

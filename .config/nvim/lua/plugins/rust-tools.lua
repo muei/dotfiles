@@ -5,7 +5,7 @@ if not status_ok then
   vim.notify(packer_name .. " not found!")
   return
 end
-packer.setup{
+packer.setup {
   -- tools = {
   --   runnables = {},
   --   inlay_hints = {
@@ -27,8 +27,8 @@ packer.setup{
     --   ["rust-analyzer"] = {
     --     checkOnSave = {
     --       command = "clippy"
-    --     }, 
+    --     },
     --   },
     -- }
-    },
+  },
 }
