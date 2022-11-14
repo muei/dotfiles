@@ -86,37 +86,17 @@ return packer.startup(function(use)
 		},
 		config = config("neo-tree"),
 	})
-	use({
-		"stevearc/aerial.nvim",
-		config = function()
-			require("aerial").setup()
-		end,
-	}) -- 大纲
-	use({ "nvim-lualine/lualine.nvim", config = config("lualine") }) -- 底部状态栏
+	use({ "stevearc/aerial.nvim" }) -- 大纲
+	use({ "nvim-lualine/lualine.nvim" }) -- 底部状态栏
 	use({
 		"akinsho/bufferline.nvim",
-		tag = "v2.*",
-		-- config = function()
-		-- 	require("bufferline").setup()
-		-- end,
-		config = "require'bufferline'.setup()",
+		tag = "v3.*", -- config = "require'bufferline'.setup()",
 	}) -- buffer line
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup()
-		end,
-	}) -- indent blank line
+	use({ "lukas-reineke/indent-blankline.nvim", config = "config.'indent-blankline'" }) -- indent blank line
 
 	--[[ 快捷键 ]]
 	use({ "junegunn/vim-easy-align" })
-	use({
-		"numToStr/Comment.nvim",
-		-- config = function()
-		-- 	require("Comment").setup()
-		-- end,
-		config = "require'Comment'.setup()",
-	}) -- 注释
+	use({ "numToStr/Comment.nvim", config = "require'Comment'.setup()" }) -- 注释
 	use({ "folke/which-key.nvim", config = config("which-key") }) -- 快捷键映射
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", config = config("telescope") }) -- 文件查找
 	use({
@@ -128,18 +108,8 @@ return packer.startup(function(use)
 	})
 
 	--[[ 编辑 ]]
-	use({
-		"kylechui/nvim-surround",
-		config = function()
-			require("nvim-surround").setup()
-		end,
-	})
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
-	})
+	use({ "wkylechui/nvim-surround", config = "require'nvim-surround'.setup{}" })
+	use({ "windwp/nvim-autopairs", config = "require'nvim-autopairs'.setup{}" })
 
 	--[[ cmp ]]
 	use({ "hrsh7th/nvim-cmp", config = config("cmp") }) -- 补全

@@ -19,6 +19,8 @@ cmp.setup({
 	window = {
 		-- completion = cmp.config.window.bordered(),
 		-- documentation = cmp.config.window.bordered(),
+		-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		-- winhighlight = "Normal:CmpItemMenu,FloatBorder:CmpItemMenuBorder,CursorLine:CmpItemMenuSel,Search:CmpItemMenuSearch",
 	},
 	formatting = {
 		fields = { "menu", "abbr", "kind" },

@@ -1,4 +1,5 @@
-require"options"
-require"keymaps"
-require"plugins/"
+require("options")
+require("keymaps")
+require("autocmds")
+require("plugins/")
 require("lsp/")
