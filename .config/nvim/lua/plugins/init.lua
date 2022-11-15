@@ -49,20 +49,12 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- window manager
 	use("nvim-lua/popup.nvim") -- Popup API from vim in Neovim
 	use("kyazdani42/nvim-web-devicons")
-	-- use({"rcarriga/nvim-notify",
-	--    config = function()
-	--      vim.notify = require("notify")
-	--    end
-	--  })
-
-	-- use({ "famiu/nvim-reload" })
-
-	-- use({
-	--   "mhartington/formatter.nvim",
-	--   config = function ()
-	--     require("formatter").setup{}
-	--   end
-	-- })
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			vim.notify = require("notify")
+		end,
+	})
 
 	--[[ UI ]]
 	--[[ theme ]]
@@ -74,10 +66,6 @@ return packer.startup(function(use)
 	-- 	end,
 	-- })
 
-	-- use({
-	-- 	"kyazdani42/nvim-tree.lua",
-	-- 	config = config("nvim-tree"),
-	-- }) -- 文件目录
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
@@ -92,7 +80,8 @@ return packer.startup(function(use)
 		"akinsho/bufferline.nvim",
 		tag = "v3.*", -- config = "require'bufferline'.setup()",
 	}) -- buffer line
-	use({ "lukas-reineke/indent-blankline.nvim", config = "config.'indent-blankline'" }) -- indent blank line
+
+	use({ "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }) -- indent blank line
 
 	--[[ 快捷键 ]]
 	use({ "junegunn/vim-easy-align" })
@@ -108,7 +97,7 @@ return packer.startup(function(use)
 	})
 
 	--[[ 编辑 ]]
-	use({ "wkylechui/nvim-surround", config = "require'nvim-surround'.setup{}" })
+	use({ "kylechui/nvim-surround", config = "require'nvim-surround'.setup{}" })
 	use({ "windwp/nvim-autopairs", config = "require'nvim-autopairs'.setup{}" })
 
 	--[[ cmp ]]
@@ -131,7 +120,7 @@ return packer.startup(function(use)
 	use({ "akinsho/toggleterm.nvim", config = config("toggleterm") })
 
 	--[[ git ]]
-	-- use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
+	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
 
 	--[[ autosave ]]
 	use({ "Pocco81/auto-save.nvim", config = config("auto-save") })
