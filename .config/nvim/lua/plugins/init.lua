@@ -133,6 +133,9 @@ return packer.startup(function(use)
 
 	-- use {'edluffy/hologram.nvim', config = config("hologram")} -- terminal image viewer
 
+	--[[ Debugging ]]
+	use("mfussenegger/nvim-dap")
+	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	--[[ lsp ]]
 	use({
 		"williamboman/mason.nvim",
