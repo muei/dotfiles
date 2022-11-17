@@ -40,6 +40,7 @@ packer.setup({
 	on_attach = on_attach,
 	sources = {
 		formatting.stylua,
+		formatting.prettier,
 		-- packer.builtins.diagnostics.eslint,
 		-- packer.builtins.completion.spell,
 		-- packer.builtins.code_actions.gitsigns,
