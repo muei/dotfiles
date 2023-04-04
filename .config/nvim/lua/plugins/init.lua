@@ -1,156 +1,145 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		print("Installing packer...")
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+local plugins = {
+  -- the colorscheme should be available when starting Neovim
+  {
+    "folke/tokyonight.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      -- load the colorscheme here
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins/init.lua source <afile> | PackerSync
-  augroup end
-]])
+  -- I have a separate config.mappings file where I require which-key.
+  -- With lazy the plugin will be automatically loaded when it is required somewhere
+  { "folke/which-key.nvim", lazy = true },
 
--- Use a protected call so we don't error out on first use
-local packer_name = "packer"
-local status_ok, packer = pcall(require, packer_name)
-if not status_ok then
-	vim.notify(packer_name .. " not found!")
-	return
-end
+  {
+    "nvim-neorg/neorg",
+    -- lazy-load on filetype
+    ft = "norg",
+    -- options for neorg. This will automatically call `require("neorg").setup(opts)`
+    opts = {
+      load = {
+        ["core.defaults"] = {},
+      },
+    },
+  },
 
-packer.init({
-	display = {
-		-- configure Packer to use a floating window for command outputs
-		open_fn = require("packer.util").float,
-	},
-	-- max_jobs = 16, -- 最大并发数
-	-- 定义源
-	-- git = {
-	--   default_url_format = "https://mirror.ghproxy.com/https://github.com/%s"
-	-- }
-})
+  {
+    "dstein64/vim-startuptime",
+    -- lazy-load on a command
+    cmd = "StartupTime",
+    -- init is called during startup. Configuration for vim plugins typically should be set in an init function
+    init = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
 
-local function config(name, path)
-	path = path or "plugins"
-	return string.format('require("%s/%s")', path, name)
-end
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }, 
+    keys = {
+      { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+    },
+    config = function()
+      --require("neo-tree").setup()
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    -- load cmp on InsertEnter
+    event = "InsertEnter",
+    -- these dependencies will only be loaded when cmp loads
+    -- dependencies are always lazy-loaded unless specified otherwise
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+    },
+    config = function()
+      -- ...
+    end,
+  },
 
-return packer.startup(function(use)
-	use("wbthomason/packer.nvim")
-	use("nvim-lua/plenary.nvim") -- window manager
-	use("nvim-lua/popup.nvim") -- Popup API from vim in Neovim
-	use("kyazdani42/nvim-web-devicons")
-	use({
-		"rcarriga/nvim-notify",
-		config = function()
-			vim.notify = require("notify")
-		end,
-	})
+  -- if some code requires a module from an unloaded plugin, it will be automatically loaded.
+  -- So for api plugins like devicons, we can always set lazy=true
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 
-	--[[ UI ]]
-	--[[ theme ]]
-	-- use("folke/tokyonight.nvim")
-	-- use({
-	-- 	"tanvirtin/monokai.nvim",
-	-- 	config = function()
-	-- 		require("monokai").setup({})
-	-- 	end,
-	-- })
+  -- you can use the VeryLazy event for things that can
+  -- load later and are not important for the initial UI
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
 
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		requires = {
-			"MunifTanjim/nui.nvim",
-		},
-		config = config("neo-tree"),
-	})
-	use({ "stevearc/aerial.nvim" }) -- 大纲
-	use({ "nvim-lualine/lualine.nvim" }) -- 底部状态栏
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v3.*", -- config = "require'bufferline'.setup()",
-	}) -- buffer line
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = { use_default_keymaps = false, max_join_length = 150 },
+  },
+  --{
+  --  'Wansmer/treesj',
+  --  keys = { '<space>m', '<space>j', '<space>s' },
+  --  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --  config = function()
+  --    require('treesj').setup({--[[ your config ]]})
+  --  end,
+  --},
 
-	use({ "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }) -- indent blank line
+  {
+    "monaqa/dial.nvim",
+    -- lazy-load on keys
+    -- mode is `n` by default. For more advanced options, check the section on key mappings
+    keys = { "<C-a>", { "<C-x>", mode = "n" } },
+  },
 
-	--[[ 快捷键 ]]
-	use({ "junegunn/vim-easy-align" })
-	use({ "numToStr/Comment.nvim", config = "require'Comment'.setup()" }) -- 注释
-	use({ "folke/which-key.nvim", config = config("which-key") }) -- 快捷键映射
-	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", config = config("telescope") }) -- 文件查找
-	use({
-		"nvim-telescope/telescope-media-files.nvim",
-		config = function()
-			-- require"telescope".extensions.media_files.media_files()
-			require("telescope").load_extension("media_files")
-		end,
-	})
+  -- local plugins need to be explicitly configured with dir
+  -- { dir = "~/projects/secret.nvim" },
 
-	--[[ 编辑 ]]
-	use({ "kylechui/nvim-surround", config = "require'nvim-surround'.setup{}" })
-	use({ "windwp/nvim-autopairs", config = "require'nvim-autopairs'.setup{}" })
+  -- you can use a custom url to fetch a plugin
+  -- { url = "git@github.com:folke/noice.nvim.git" },
 
-	--[[ cmp ]]
-	use({ "hrsh7th/nvim-cmp", config = config("cmp") }) -- 补全
-	use("hrsh7th/cmp-path") -- 路径补全
-	use("hrsh7th/cmp-buffer") -- 当前文本编辑补全
-	use("hrsh7th/cmp-cmdline") -- 命令行补全
-	use("hrsh7th/cmp-vsnip")
-	use("hrsh7th/vim-vsnip")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-	use("hrsh7th/cmp-nvim-lsp-signature-help")
-	use("f3fora/cmp-spell") -- 英文单词拼写
+  -- local plugins can also be configure with the dev option.
+  -- This will use {config.dev.path}/noice.nvim/ instead of fetching it from Github
+  -- With the dev option, you can easily switch between the local and installed version of a plugin
+  { "folke/noice.nvim", dev = true },
+}
 
-	-- --[[ format ]]
-	use({ "jose-elias-alvarez/null-ls.nvim", config = "require'plugins/null-ls'" })
+local opts = {
+  ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
+  },
+}
+require("lazy").setup(plugins, opts)
 
-	--[[ terminal ]]
-	-- use({ "voldikss/vim-floaterm" })
-	use({ "akinsho/toggleterm.nvim", config = config("toggleterm") })
-
-	--[[ git ]]
-	use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
-
-	--[[ autosave ]]
-	use({ "Pocco81/auto-save.nvim", config = config("auto-save") })
-
-	--[[ markdown preview ]]
-	-- use({
-	--   "iamcco/markdown-preview.nvim",
-	--   run = function() vim.fn["mkdp#util#install"]() end,
-	-- })
-
-	-- use {'edluffy/hologram.nvim', config = config("hologram")} -- terminal image viewer
-
-	--[[ Debugging ]]
-	use("mfussenegger/nvim-dap")
-	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	--[[ lsp ]]
-	use({
-		"williamboman/mason.nvim",
-		requires = {
-			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
-		},
-		config = config("", "lsp"),
-	})
-
-	use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
-
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
