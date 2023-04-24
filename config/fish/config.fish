@@ -40,3 +40,9 @@ set -x GOPROXY https://goproxy.cn,direct
 # .net
 set -x DOTNET_ROOT ~/.dotnet
 set -x PATH $PATH $DOTNET_ROOT $DOTNET_ROOT/tools
+
+# python
+set -x PATH $PATH ~/.local/bin
+
+# pyenv
+pyenv init - | source
