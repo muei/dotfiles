@@ -2,6 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+set fish_indent 2
 set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
 set -gx SUDO_EDITOR $EDITOR
@@ -41,7 +42,7 @@ set -x GOPROXY https://goproxy.cn,direct
 set -x DOTNET_ROOT ~/.dotnet
 set -x PATH $PATH $DOTNET_ROOT $DOTNET_ROOT/tools
 
-# python
+# local bin
 set -x PATH $PATH ~/.local/bin
 
 # pyenv
