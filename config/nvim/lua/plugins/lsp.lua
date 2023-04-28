@@ -30,9 +30,16 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
+        -- nls.builtins.diagnostics.editorconfig_checker,
         nls.builtins.formatting.prettierd.with({
-          filetypes = { "python" },
-          except = { "go" },
+          editorconfig = true,
+          -- filetypes = { "python" },
+          -- except = { "go" },
+          extra_args = {
+            -- "--no-semi",
+            "--tab-width",
+            2,
+          },
         }),
         -- nls.builtins.diagnostics.markdownlint,
         -- nls.builtins.diagnostics.selene.with({
