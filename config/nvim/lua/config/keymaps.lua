@@ -3,3 +3,13 @@
 -- Add any additional keymaps here
 vim.keymap.set("n", "<leader>w\\", "<C-w>v", { noremap = true, silent = true, desc = "Split window right" })
 vim.keymap.set("n", "<leader>\\", "<C-w>v", { noremap = true, silent = true, desc = "Split window right" })
+
+-- overwrite lazyvim mappings with vim-tmux-navigator mappings
+-- see: https://github.com/christoomey/vim-tmux-navigator/blob/master/plugin/tmux_navigator.vim
+-- vim.cmd([[
+--   noremap <silent> <c-h> :<C-U>TmuxNavigateLeft<cr>
+--   noremap <silent> <c-j> :<C-U>TmuxNavigateDown<cr>
+--   noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
+--   noremap <silent> <c-l> :<C-U>TmuxNavigateRight<cr>
+--   noremap <silent> <c-\> :<C-U>TmuxNavigatePrevious<cr>
+-- ]])

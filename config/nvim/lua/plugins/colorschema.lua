@@ -6,6 +6,13 @@ return {
     },
   },
   {
+    "loctvl842/monokai-pro.nvim",
+    lazy = false,
+    opts = {
+      transparent_background = true,
+    },
+  },
+  {
     "EdenEast/nightfox.nvim",
     lazy = false,
     opts = {
@@ -17,5 +24,11 @@ return {
     opts = {
       colorscheme = "nightfox",
     },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    event = "VeryLazy",
+    opts = function(_, opts) end,
   },
 }
