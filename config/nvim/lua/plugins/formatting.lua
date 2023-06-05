@@ -28,15 +28,15 @@ return {
           --     -- vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
           --   }
           -- end,
-          extra_args = {
-            "--editorconfig",
-            -- "--single-quote",
-            -- false,
-            -- "--tab-width",
-            -- 2,
-            -- "-t",
-            -- "  ",
-          },
+          -- extra_args = {
+          --   "--editorconfig",
+          -- "--single-quote",
+          -- false,
+          -- "--tab-width",
+          -- 2,
+          -- "-t",
+          -- "  ",
+          -- },
         }),
         -- nls.builtins.diagnostics.markdownlint,
         -- nls.builtins.diagnostics.selene.with({

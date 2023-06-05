@@ -1,3 +1,5 @@
+-- ALERT: also change the theme in lualine
+local colorscheme = "monokai-pro"
 return {
   {
     "rcarriga/nvim-notify",
@@ -10,25 +12,31 @@ return {
     lazy = false,
     opts = {
       transparent_background = true,
-    },
-  },
-  {
-    "EdenEast/nightfox.nvim",
-    lazy = false,
-    opts = {
-      options = { transparent = true },
+      background_clear = {
+        -- "float_win",
+        "toggleterm",
+        "telescope",
+        -- "which-key",
+        "renamer",
+        "notify",
+        -- "nvim-tree",
+        "neo-tree",
+        -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+      }, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfox",
+      colorscheme = "monokai-pro",
     },
   },
   {
     "nvim-lualine/lualine.nvim",
     optional = true,
     event = "VeryLazy",
-    opts = function(_, opts) end,
+    opts = function(_, opts)
+      opts.theme = colorscheme
+    end,
   },
 }
