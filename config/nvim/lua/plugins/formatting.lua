@@ -18,7 +18,7 @@ return {
           extra_filetypes = {
             "python",
             "toml",
-            "fish",
+            "nginx",
           },
           -- extra_args = function(params)
           --   return {
