@@ -30,10 +30,10 @@ abbr mkdir "mkdir -vp"
 
 # Path
 # golang
-set -x GOROOT /usr/local/go
-set -x GOPATH $HOME/go # workspace path
-set -x GOBIN $GOPATH/bin
-set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
+# set -x GOROOT /usr/local/go
+# set -x GOPATH $HOME/go # workspace path
+# set -x GOBIN $GOPATH/bin
+# set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
 # fish_add_path $PATH /usr/local/go/bin $GOPATH/bin
 set -x GO111MODULE on
 set -x GOPROXY https://goproxy.cn,direct
