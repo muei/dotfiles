@@ -3,22 +3,23 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
       local nls = require("null-ls")
-      local ft = nls.builtins.formatting
-      local dn = nls.builtins.diagnostics
+      local f = nls.builtins.formatting
+      local d = nls.builtins.diagnostics
       vim.list_extend(opts.sources, {
         -- python
-        ft.black,
-        dn.ruff,
+        f.black,
+        d.ruff,
 
-        dn.yamllint,
+        d.yamllint,
         -- nls.builtins.diagnostics.editorconfig_checker,
-        ft.prettierd.with({
+        f.prettierd.with({
           -- editorconfig = true,
           -- except = { "go" },
           extra_filetypes = {
             "python",
             "toml",
             "nginx",
+            "cs",
           },
           -- extra_args = function(params)
           --   return {
