@@ -39,8 +39,8 @@ set -x GO111MODULE on
 set -x GOPROXY https://goproxy.cn,direct
 
 # .net
-set -x DOTNET_ROOT $HOME/.dotnet
-set -x PATH $PATH $DOTNET_ROOT $DOTNET_ROOT/tools
+# set -x DOTNET_ROOT $HOME/.dotnet
+# set -x PATH $PATH $DOTNET_ROOT $DOTNET_ROOT/tools
 
 # local bin
 set -x PATH $PATH $HOME/.local/bin
