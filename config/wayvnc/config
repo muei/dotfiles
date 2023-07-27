@@ -1,0 +1,6 @@
+address=10.20.34.80
+enable_auth=true
+username=young
+password=imwayvnc
+private_key_file=~/key.pem
+certificate_file=~/cert.pem
