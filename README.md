@@ -15,7 +15,19 @@
 sudo pacman -Sy neovim
 chmod +x install.sh
 ./install.sh
+
+## fish shell
+sudo pacman -S fish
 ```
+## font
+# chinese font
+paru -S noto-fonts-cjk # Google Noto CJK fonts
+paru -S ttf-jetbrains-mono-nerd # nerd font
+
+
+## input methods
+
+paru -S fcitx5-im fcitx5-im
 
 ## Zellij
 
