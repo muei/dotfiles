@@ -29,6 +29,10 @@ paru -S ttf-jetbrains-mono-nerd # nerd font
 
 paru -S fcitx5-im fcitx5-im
 
+## waybar
+paru -S waybar-hyprland
+# default config path: /etc/xdg/waybar
+
 ## Zellij
 
 ```bash
@@ -41,4 +45,11 @@ yay -Sy zellij
 yay -Sy nushell
 # set as default shell
 chsh -s ${which nu}
+```
+
+
+## Commands
+```bash
+# list installed package
+paru -Ps
 ```
