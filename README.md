@@ -20,27 +20,30 @@ chmod +x install.sh
 sudo pacman -S fish
 ```
 ## font
+```
 # chinese font
 paru -S noto-fonts-cjk # Google Noto CJK fonts
 paru -S ttf-jetbrains-mono-nerd # nerd font
-
+paru -S ttf-firacode-nerd
+```
 
 ## input methods
-
+```
 paru -S fcitx5-im fcitx5-im
+```
 
 ## waybar
+```
 paru -S waybar-hyprland
 # default config path: /etc/xdg/waybar
+```
 
 ## Zellij
-
 ```bash
 yay -Sy zellij
 ```
 
 ## Nushell
-
 ```bash
 yay -Sy nushell
 # set as default shell
