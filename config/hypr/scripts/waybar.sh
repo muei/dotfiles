@@ -11,7 +11,8 @@
 # -----------------------------------------------------
 # Quit all running waybar instances
 # -----------------------------------------------------
-killall waybar
-sleep 0.2
+# killall waybar
+# sleep 0.2
+echo "hello world"
 
-waybar
+waybar &

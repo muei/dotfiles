@@ -36,6 +36,13 @@ paru -S fcitx5-im fcitx5-im
 ```
 paru -S waybar-hyprland
 # default config path: /etc/xdg/waybar
+
+## alacritty
+```bash
+sudo pacman -S alacritty
+# sample config
+cp /usr/share/doc/alacritty/example/alacritty.yml
+```
 ```
 
 ## Zellij
