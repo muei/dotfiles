@@ -19,6 +19,15 @@ chmod +x install.sh
 ## fish shell
 sudo pacman -S fish
 ```
+## Node
+```
+# install node version manager
+cargo install fnm
+# add cargo bin to path
+fish_add_path ~/.cargo/bin
+# Create ~/.config/fish/conf.d/fnm.fish add this line to it:
+echo "fnm env --use-on-cd | source" >> fnm.fish
+```
 
 ## font
 
