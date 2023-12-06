@@ -19,7 +19,9 @@ chmod +x install.sh
 ## fish shell
 sudo pacman -S fish
 ```
+
 ## Node
+
 ```
 # install node version manager
 cargo install fnm
@@ -78,3 +80,7 @@ chsh -s ${which nu}
 # list installed package
 paru -Ps
 ```
+
+## PVE K8S
+
+https://gist.github.com/acj/3cb5674670e6145fa4f355b3239165c7?permalink_comment_id=4760024#gistcomment-4760024
