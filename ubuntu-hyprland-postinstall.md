@@ -282,13 +282,13 @@ services:
   - 浏览器访问 `http://localhost:8006`，容器会使用本地 `/boot.iso` 自动完成 Windows 安装。
   - 安装完成后，可通过 RDP 客户端连接：`host:3389`（用户名 `Docker`，密码 `admin`，详见 [dockur/windows readme](https://github.com/dockur/windows)）。
 
-- 在 Ubuntu Hyprland（Wayland）下使用 `wlfreerdp3` 连接容器中的 Windows：
-  - 安装：`sudo apt install freerdp3-wayland`（Wayland 版本的 FreeRDP3 客户端）
+- 在 Ubuntu Hyprland（Wayland）下使用 `sdl-freerdp3` 连接容器中的 Windows：
+  - 安装：`sudo apt install freerdp3-sdl`
   - 典型连接命令（动态分辨率 + 剪贴板）：
 
 ```bash
 # 直接在终端前台运行（会占用当前 terminal）
-wlfreerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore
+sdl-freerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore
 ```
 
 - 如果不希望占用当前 terminal，有两种方式：
@@ -297,19 +297,19 @@ wlfreerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /
 ```conf
 # 写入 ~/.config/hypr/UserConfigs/Keybinds.conf
 # Super + W 启动 / 连接 dockur/windows 容器中的 Windows
-bind = $mainMod, W, exec, wlfreerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore
+bind = $mainMod, W, exec, sdl-freerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore
 ```
 
   - **用 shell 后台方式启动**（终端中执行，不关心输出）：
 
 ```bash
-nohup wlfreerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore >/dev/null 2>&1 &
+nohup sdl-freerdp3 /v:localhost:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore >/dev/null 2>&1 &
 ```
 
   - 若容器使用了 macvlan 独立 IP（参考 [dockur/windows 文档](https://github.com/dockur/windows) 中的 macvlan 部分），则将 `localhost` 替换为容器 IP，例如：
 
 ```bash
-wlfreerdp3 /v:192.168.0.100:3389 /u:yy /p:yy /dynamic-resolution +clipboard /cert:ignore
+sdl-freerdp3 /v:192.168.0.100:3389 /u:Docker /p:admin /dynamic-resolution +clipboard /cert:ignore
 ```
 
 - 后续可以参考 `omarchy-windows-vm` 的结构写一个本地脚本（例如 `~/bin/windows-vm`）：
