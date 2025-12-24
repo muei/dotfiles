@@ -6,6 +6,12 @@ services:
       VERSION: "11"
       USERNAME: "yy"
       PASSWORD: "yy"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      DISK_SIZE: "60G"
+      REGION: "en-US"
+      KEYBOARD: "en-US"
+      LANGUAGE: "Chinese"
     devices:
       - /dev/kvm
       - /dev/net/tun
@@ -16,7 +22,19 @@ services:
       - 3389:3389/tcp
       - 3389:3389/udp
     volumes:
-      - ~/windows:/storage
-      - ~/Documents/Win11Win11_25H2_English_x64.iso:/boot.iso
+      - ~/Documents/shared:/shared
+      - ~/Documents/windows:/storage
+      - ~/Documents/windows/Win11_25H2_English_x64.iso:/boot.iso
     restart: always
     stop_grace_period: 2m
+    networks:
+        - windows-net
+# 定义自定义网络（核心：自定义名称、驱动）
+networks:
+  windows-net:  # 自定义网络名称（可任意命名，如win-custom-net）
+    driver: bridge  # 网络驱动（默认bridge，单机桥接模式）
+    # 可选：自定义子网/网关（按需添加）
+    # ipam:
+    #   config:
+    #     - subnet: 172.21.0.0/16
+    #       gateway: 172.21.0.1
