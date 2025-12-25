@@ -70,6 +70,48 @@ network:
 
 - 设置时区：`sudo timedatectl set-timezone Asia/Shanghai`（按需替换）
 - 启用 NTP：`sudo timedatectl set-ntp true`
+
+### NTP 换源（国内网络优化）
+
+- **说明**：Ubuntu 25.10 默认已使用 chrony，无需安装。只需启用 NTP 并配置国内源即可。
+
+- **备份原配置**：
+  ```bash
+  sudo cp /etc/chrony/sources.d/ubuntu-ntp-pools.sources /etc/chrony/sources.d/ubuntu-ntp-pools.sources.bak
+  ```
+
+- **配置国内 NTP 源**：创建新文件 `/etc/chrony/sources.d/ntp-cn.sources`，添加以下内容：
+  ```conf
+  # 替换为国内 NTP 源（阿里云/腾讯云，禁用 NTS 适配国内网络）
+  # 移除 nts prefer 以关闭加密，避免端口拦截
+  pool ntp.aliyun.com iburst maxsources 2
+  pool time.cloud.tencent.com iburst maxsources 2
+  pool cn.ntp.org.cn iburst maxsources 1
+  ```
+
+- **禁用原配置**（可选，如需完全使用国内源）：
+  ```bash
+  # 方法1：重命名原文件（推荐，便于恢复）
+  sudo mv /etc/chrony/sources.d/ubuntu-ntp-pools.sources /etc/chrony/sources.d/ubuntu-ntp-pools.sources.disabled
+  
+  # 方法2：注释掉原文件内容
+  # sudo sed -i 's/^/# /' /etc/chrony/sources.d/ubuntu-ntp-pools.sources
+  ```
+
+- **应用配置**：
+  ```bash
+  sudo systemctl restart chronyd
+  sudo timedatectl set-ntp 1
+  ```
+
+- **验证**：
+  ```bash
+  chronyc sources -v
+  # 或
+  timedatectl timesync-status
+  # 或
+  timedatectl
+  ```
 - 若与 Windows 双系统出现时间不一致（开机互相改时间），实际验证只有下面命令有效：
   - `sudo timedatectl set-local-rtc 1 --adjust-system-clock`
   - 含义：将硬件时钟改为本地时间（local RTC），配合 Windows 默认行为，避免每次切换系统时互相“拉扯”时间。
@@ -81,12 +123,24 @@ network:
 
 ## 5) 输入法：fcitx5-rime + 小鹤双拼 + 雾凇
 - 实践下来 `fcitx5-rime` 在 Hyprland 下体验更稳定，直接安装核心包即可：
-  - 安装：`sudo apt install fcitx5 fcitx5-rime`
-- 环境变量：按照 [JaKooLit Ubuntu-Hyprland 25.10 分支](https://github.com/JaKooLit/Ubuntu-Hyprland/tree/25.10) 的约定，写入 Hyprland 的环境变量配置 `~/.config/hypr/UserConfigs/ENVariables.conf`：
-  - 添加：
-    - `env = GTK_IM_MODULE,fcitx`
-    - `env = QT_IM_MODULE,fcitx`
-    - `env = XMODIFIERS,@im=fcitx`
+  - 安装：`sudo apt install fcitx5-rime`
+- 环境变量配置（推荐方式：系统级配置）：
+  - 在 `/etc/environment.d/` 目录下创建配置文件（如 `50-fcitx5.conf`）：
+    ```bash
+    sudo tee /etc/environment.d/50-fcitx5.conf <<EOF
+    GTK_IM_MODULE=fcitx
+    QT_IM_MODULE=fcitx
+    XMODIFIERS=@im=fcitx
+    EOF
+    ```
+  - 此方式会在系统级别设置环境变量，适用于所有桌面环境和应用。
+
+- 环境变量配置（备选方式：Hyprland 专用）：
+  - 按照 [JaKooLit Ubuntu-Hyprland 25.10 分支](https://github.com/JaKooLit/Ubuntu-Hyprland/tree/25.10) 的约定，写入 Hyprland 的环境变量配置 `~/.config/hypr/UserConfigs/ENVariables.conf`：
+    - 添加：
+      - `env = GTK_IM_MODULE,fcitx`
+      - `env = QT_IM_MODULE,fcitx`
+      - `env = XMODIFIERS,@im=fcitx`
 - 小鹤双拼 + 雾凇配置（Rime 侧）：
   - 配置目录：`~/.local/share/fcitx5/rime`
   - 将雾凇 Rime 配置放入该目录（推荐使用 Git 同步整个配置仓库，避免手动拷贝散文件）。

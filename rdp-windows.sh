@@ -21,11 +21,12 @@ RDP_TITLE="Windows11"
 
 # 核心：拆解所有参数为数组（关键！避免空格/特殊字符解析错误）
 RDP_ARGS=(
-  "/u:$RDP_USER"           # 用户名（带引号的写法可省略，数组自动处理空格）
-  "/p:$RDP_PASS"           # 密码
-  "/v:$RDP_HOST:$RDP_PORT" # 主机+端口（自动拼接）
-  "-grab-keyboard"         # 独占键盘
-  "/kbd:remap:0x3a=0x1d,remap:0x1d=0x3a"
+  "/u:$RDP_USER"                                         # 用户名（带引号的写法可省略，数组自动处理空格）
+  "/p:$RDP_PASS"                                         # 密码
+  "/v:$RDP_HOST:$RDP_PORT"                               # 主机+端口（自动拼接）
+  "/kbd:remap:0x3a=0x1d,remap:0x1d=0x3a"                 # 交换 Caps/Ctrl
+  "/kbd:remap:0x5b=0xff,remap:0x5c=0xff"                 # 彻底屏蔽远程 Win 键
+  "-grab-keyboard"                                       # -: 禁止独占，让 Win 留在 Linux. +: 独占
   "/sound"                                               # 音频输出
   "/microphone"                                          # 麦克风输入
   "/cert:ignore"                                         # 忽略证书错误（替代旧版 /cert-ignore）
