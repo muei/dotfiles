@@ -141,21 +141,39 @@ network:
       - `env = GTK_IM_MODULE,fcitx`
       - `env = QT_IM_MODULE,fcitx`
       - `env = XMODIFIERS,@im=fcitx`
-- 小鹤双拼 + 雾凇配置（Rime 侧）：
-  - 配置目录：`~/.local/share/fcitx5/rime`
-  - 将雾凇 Rime 配置放入该目录（推荐使用 Git 同步整个配置仓库，避免手动拷贝散文件）。
-  - 关键自定义文件示例（启用小鹤双拼 schema）：
+- 安装 plum（Rime 配置管理器）：
+  ```bash
+  # 下载 plum 安装脚本
+  cd ~/.local/share/fcitx5/rime
+  git clone --depth 1 https://github.com/rime/plum.git
+  cd plum
+  ```
 
-```yaml
-# ~/.local/share/fcitx5/rime/default.custom.yaml
-patch:
-  schema_list:
-    - schema: double_pinyin_flypy   # 小鹤双拼
-```
+- 安装雾凇拼音（使用 plum）：
+  ```bash
+  # 在 plum 目录下执行安装命令
+  cd ~/.local/share/fcitx5/rime/plum
+  bash rime-install iDvel/rime-ice:others/recipes/full
+  ```
+  或者直接使用在线安装（无需先克隆 plum）：
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/rime/plum/master/rime-install | bash -s -- iDvel/rime-ice:others/recipes/full
+  ```
+  这会自动下载并安装雾凇拼音配置到 `~/.local/share/fcitx5/rime` 目录。
+
+- 小鹤双拼配置：
+  - 配置目录：`~/.local/share/fcitx5/rime`
+  - 雾凇拼音安装后已包含小鹤双拼方案，只需创建或编辑 `default.custom.yaml` 启用：
+    ```yaml
+    # ~/.local/share/fcitx5/rime/default.custom.yaml
+    patch:
+      schema_list:
+        - schema: double_pinyin_flypy   # 小鹤双拼（雾凇）
+    ```
 
 - 重新部署与选择方案：
-  - 重启 fcitx5 或在 fcitx5 菜单中选择“重新部署”/`rime_deployer`
-  - 在 fcitx5 设置中，将“小鹤双拼（雾凇）”设为首选方案，关闭不用的其他输入法，减少干扰。
+  - 重启 fcitx5 或在 fcitx5 菜单中选择"重新部署"/`rime_deployer`
+  - 在 fcitx5 设置中，将"小鹤双拼（雾凇）"设为首选方案，关闭不用的其他输入法，减少干扰。
 
 ## 5) Hyprland 继续调优
 - 核心配置文件：`~/.config/hypr/hyprland.conf`
