@@ -62,7 +62,7 @@ network:
 
 - DNS 与代理设置参考：
   - DNS：如需全局自定义，编辑 `/etc/systemd/resolved.conf`，取消注释并写入 `DNS=1.1.1.1 8.8.8.8`，再用 `sudo systemctl restart systemd-resolved`
-  - 终端代理：在 `config.fish` 中按需导出 `http_proxy/https_proxy/no_proxy`
+  - 终端代理：使用 `proxy.fish` 函数管理（详见第 6 节「终端与工具链」）
   - 图形界面临时代理：在需要时用 `env http_proxy=... app` 启动，避免全局污染
 - VPN：建议记录实际使用的 VPN 客户端及其配置（例如 `wg-quick`、`.ovpn` 文件等），密钥存放在受限权限目录。
 
@@ -202,6 +202,28 @@ network:
   - Python：优先使用 `uv` 管理解释器与依赖（替代传统 `pyenv` + `pip`/`pipx` 组合）
   - Node：`fnm`
   - Go/Java 等：记录安装路径与 GOPATH/JAVA_HOME
+
+- **终端代理管理（proxy.fish）**
+  - **安装**：将 `proxy.fish` 脚本复制到 fish 的 functions 目录：
+    ```bash
+    cp proxy.fish ~/.config/fish/functions/proxy.fish
+    ```
+    fish 会自动 source `~/.config/fish/functions/` 目录下的文件，无需执行权限。复制后重新打开终端或执行 `source ~/.config/fish/functions/proxy.fish` 即可使用。
+  - **功能特点**：
+    - 支持自定义 IP 和端口，协议自动区分（HTTP/HTTPS vs SOCKS5）
+    - 默认配置：IP=`127.0.0.1`，端口=`7890`（可在脚本中修改 `default_proxy_ip` 和 `default_proxy_port`）
+    - 自动设置所有常用代理环境变量（大小写兼容）：`http_proxy`, `https_proxy`, `HTTP_PROXY`, `HTTPS_PROXY`, `all_proxy`, `ALL_PROXY`
+    - 支持一键启用/关闭代理，以及代理连通性测试
+  - **使用方法**：
+    - `proxy` - 显示帮助信息
+    - `proxy on` - 启用默认代理（使用默认 IP 和端口）
+    - `proxy on <ip> <port>` - 启用自定义 IP+端口的代理（例如：`proxy on 192.168.1.100 8080`）
+    - `proxy off` - 一键关闭所有代理环境变量
+    - `proxy test` - 验证当前代理的可用性（通过访问 Google 测试）
+  - **工作原理**：
+    - HTTP/HTTPS 协议使用 `http://` 前缀
+    - SOCKS5 协议使用 `socks5://` 前缀（通过 `all_proxy` / `ALL_PROXY` 设置）
+    - 使用 `set -xU` 设置全局环境变量，确保在当前会话和后续会话中生效
 
 ## 7) 备份与快照
 - 若使用 timeshift/snapper，记录计划与排除项
