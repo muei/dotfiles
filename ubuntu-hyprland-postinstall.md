@@ -202,6 +202,49 @@ network:
   - Python：优先使用 `uv` 管理解释器与依赖（替代传统 `pyenv` + `pip`/`pipx` 组合）
   - Node：`fnm`
   - Go/Java 等：记录安装路径与 GOPATH/JAVA_HOME
+  - Java 示例（Android Studio 内嵌 JDK，通过 `java.fish` 管理）：
+    - 在仓库根目录有 `java.fish` 示例脚本，内容大致为：
+      ```fish
+      # 配置 Android Studio（/opt 目录）内嵌 JDK 的 JAVA_HOME
+      set -x JAVA_HOME /opt/android-studio/jbr
+
+      # 将 JDK bin 目录添加到 PATH，使 java 命令全局可用
+      set -x PATH $JAVA_HOME/bin $PATH
+      ```
+    - 使用方式（推荐作为 functions 自动加载函数）：
+      ```bash
+      cp java.fish ~/.config/fish/functions/java.fish
+      ```
+      复制后重新打开终端或执行 `source ~/.config/fish/functions/java.fish`，即可在所有 fish 会话中自动设置 `JAVA_HOME` 和 `PATH`。
+
+- **Android 模拟器（NVIDIA 下用命令行启动）**
+  - 在使用 NVIDIA 显卡 + Android Studio 图形界面启动 Emulator 时，可能出现模拟器卡死、界面不刷新等问题，此时建议改用命令行方式启动。
+  - 示例命令（基于已创建好的 AVD，例如 `Pixel_3a_API_36_extension_level_17_x86_64`）：
+    ```bash
+    ~/Android/Sdk/emulator/emulator -avd Pixel_3a_API_36_extension_level_17_x86_64 \
+      -gpu swiftshader_indirect \
+      -memory 2048 \
+      -cores 2 \
+      -no-audio \
+      -no-boot-anim \
+      -no-snapshot \
+      -no-snapshot-load
+    ```
+  - 参数说明与可选优化：
+    - `-gpu swiftshader_indirect`：使用软件渲染（SwiftShader），绕过部分 NVIDIA/Wayland 下的图形兼容问题，稳定性更好，牺牲一定性能；
+    - `-memory 2048`：分配给虚拟机的内存（单位 MiB），可根据物理内存情况调整（如 4096 等）；
+    - `-cores 2`：为虚拟机分配的 CPU 核心数，过高会影响宿主机流畅度，建议 2–4 之间按需调整；
+    - `-no-audio`：关闭音频子系统，减少资源占用和潜在的音频设备冲突；
+    - `-no-boot-anim`：关闭开机动画，加快启动速度；
+    - `-no-snapshot` / `-no-snapshot-load`：不使用快照启动/加载，每次干净启动，避免损坏快照导致的奇怪问题；
+    - 其他常用参数（按需考虑）：
+      - `-no-window`：无窗口模式运行，只用于 CI 或纯后台运行场景；
+      - `-dns-server 8.8.8.8,1.1.1.1`：显式指定 DNS，网络环境复杂时有助于提升解析成功率；
+      - `-wipe-data`：清空模拟器数据，相当于恢复出厂设置（仅在需要重置环境时使用）。
+  - 建议：
+    - 将上述命令写成脚本（例如 `~/bin/android-emulator-pixel3a`），并加到 PATH，便于快速启动；
+    - 根据实际机器性能调整 `-memory` 和 `-cores` 参数；
+    - 若有多个 AVD，可为每个 AVD 分别写一个脚本，或写一个接受 AVD 名称参数的通用启动脚本。
 
 - **终端代理管理（proxy.fish）**
   - **安装**：将 `proxy.fish` 脚本复制到 fish 的 functions 目录：
