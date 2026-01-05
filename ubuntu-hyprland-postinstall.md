@@ -211,11 +211,12 @@ network:
       # 将 JDK bin 目录添加到 PATH，使 java 命令全局可用
       set -x PATH $JAVA_HOME/bin $PATH
       ```
-    - 使用方式（推荐作为 functions 自动加载函数）：
+    - 使用方式（推荐放在 `conf.d`，随 fish 启动自动加载）：
       ```bash
-      cp java.fish ~/.config/fish/functions/java.fish
+      mkdir -p ~/.config/fish/conf.d
+      cp java.fish ~/.config/fish/conf.d/java.fish
       ```
-      复制后重新打开终端或执行 `source ~/.config/fish/functions/java.fish`，即可在所有 fish 会话中自动设置 `JAVA_HOME` 和 `PATH`。
+      复制后重新打开终端或执行 `source ~/.config/fish/conf.d/java.fish`，即可在所有 fish 会话中自动设置 `JAVA_HOME` 和 `PATH`。
 
 - **Android 模拟器（NVIDIA 下用命令行启动）**
   - 在使用 NVIDIA 显卡 + Android Studio 图形界面启动 Emulator 时，可能出现模拟器卡死、界面不刷新等问题，此时建议改用命令行方式启动。
