@@ -218,6 +218,18 @@ network:
       ```
       复制后重新打开终端或执行 `source ~/.config/fish/conf.d/java.fish`，即可在所有 fish 会话中自动设置 `JAVA_HOME` 和 `PATH`。
 
+  - Android SDK 工具配置（通过 `android.fish` 管理）：
+    - 创建 `~/.config/fish/conf.d/android.fish` 文件，内容如下：
+      ```fish
+      # Android SDK
+      set --export ANDROID_HOME "$HOME/Android/Sdk"
+      set --export PATH $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools $PATH
+      ```
+    - 配置说明：
+      - `ANDROID_HOME`：Android SDK 的根目录路径（通常为 `~/Android/Sdk`）
+      - `PATH` 添加：将 `emulator` 和 `platform-tools`（包含 `adb`、`fastboot` 等）目录加入 PATH，使这些工具在终端中全局可用
+    - 重新打开终端后，即可直接使用 `emulator`、`adb` 等命令，无需输入完整路径
+
 - **Android 模拟器（NVIDIA 下用命令行启动）**
   - 在使用 NVIDIA 显卡 + Android Studio 图形界面启动 Emulator 时，可能出现模拟器卡死、界面不刷新等问题，此时建议改用命令行方式启动。
   - 示例命令（基于已创建好的 AVD，例如 `Pixel_3a_API_36_extension_level_17_x86_64`）：
